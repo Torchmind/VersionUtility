@@ -1,0 +1,168 @@
+/*
+ * Copyright 2015 Johannes Donath <johannesd@torchmind.com>
+ * and other copyright owners as documented in the project's IP log.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * 	http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.torchmind.utility.version;
+
+import javax.annotation.Nonnegative;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.function.Consumer;
+
+/**
+ * Represents a version.
+ *
+ * @param <T> the implementing type.
+ * @author Johannes Donath
+ */
+public interface IVersion<T extends IVersion> extends Comparable<T> {
+
+        /**
+         * Retrieves the major version bit.
+         *
+         * @return the bit.
+         */
+        @Nonnegative
+        int major ();
+
+        /**
+         * Sets the major version bit.
+         *
+         * @param value the bit.
+         * @return the instance.
+         */
+        @Nonnull
+        T major (@Nonnegative int value);
+
+        /**
+         * Retrieves the minor version bit.
+         *
+         * @return the bit.
+         */
+        @Nonnegative
+        int minor ();
+
+        /**
+         * Sets the minor version bit.
+         *
+         * @param value the bit.
+         * @return the instance.
+         */
+        @Nonnull
+        T minor (@Nonnegative int value);
+
+        /**
+         * Checks whether this version is newer than {@code version}.
+         *
+         * @param version the version to compare to.
+         * @return {@code true} if newer than {@code version}, {@code false} otherwise.
+         */
+        boolean newerThan (@Nullable T version);
+
+        /**
+         * Executes {@code consumer} if this version is newer than {@code version}.
+         *
+         * @param version  the version to compare to.
+         * @param consumer the consumer.
+         * @return the instance.
+         */
+        @Nonnull
+        T newerThan (@Nullable T version, @Nonnull Consumer<T> consumer);
+
+        /**
+         * Checks whether this version is older than {@code version}.
+         *
+         * @param version the version.
+         * @return {@code true} if older than {@code version}, {@code false} otherwise.
+         */
+        boolean olderThan (@Nullable T version);
+
+        /**
+         * Executes {@code consumer} if this version is older than {@code version}.
+         *
+         * @param version  the version to compare to.
+         * @param consumer the consumer.
+         * @return the instance.
+         */
+        @Nonnull
+        T olderThan (@Nullable T version, @Nonnull Consumer<T> consumer);
+
+        /**
+         * Retrieves the patch version bit.
+         *
+         * @return the bit.
+         */
+        @Nonnegative
+        int patch ();
+
+        /**
+         * Sets the patch version bit.
+         *
+         * @param value the bit.
+         * @return the instance.
+         */
+        @Nonnull
+        T patch (@Nonnegative int value);
+
+        /**
+         * Checks whether this version is stable.
+         *
+         * @return {@code true} if stable, {@code false} otherwise.
+         */
+        boolean stable ();
+
+        /**
+         * Executes {@code consumer} if this version is stable.
+         *
+         * @param consumer the consumer.
+         * @return the instance.
+         */
+        @Nonnull
+        T stable (@Nonnull Consumer<T> consumer);
+
+        /**
+         * Checks whether this version is unstable.
+         *
+         * @return {@code true} if unstable, {@code false} otherwise.
+         */
+        boolean unstable ();
+
+        /**
+         * Executes {@code consumer} if this version is unstable.
+         *
+         * @param consumer the consumer.
+         * @return the instance.
+         */
+        @Nonnull
+        T unstable (@Nonnull Consumer<T> consumer);
+
+        /**
+         * Checks whether this version is equal to {@code version}.
+         *
+         * @param version the version to compare to.
+         * @return {@code true} if equal to {@code version}, {@code false} otherwise.
+         */
+        boolean equals (@Nullable T version);
+
+        /**
+         * Executes {@code consumer} if this version is equal to {@code version}.
+         *
+         * @param version  the version to compare to.
+         * @param consumer the consumer.
+         * @return the instance.
+         */
+        @Nonnull
+        T equals (@Nullable T version, @Nonnull Consumer<T> consumer);
+}
