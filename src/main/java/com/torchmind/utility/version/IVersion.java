@@ -19,6 +19,7 @@ package com.torchmind.utility.version;
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.annotation.concurrent.ThreadSafe;
 import java.util.function.Consumer;
 
 /**
@@ -27,6 +28,7 @@ import java.util.function.Consumer;
  * @param <T> the implementing type.
  * @author Johannes Donath
  */
+@ThreadSafe
 public interface IVersion<T extends IVersion> extends Comparable<T> {
 
         /**
