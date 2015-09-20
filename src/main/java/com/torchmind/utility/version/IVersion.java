@@ -167,4 +167,12 @@ public interface IVersion<T extends IVersion> extends Comparable<T> {
          */
         @Nonnull
         T equals (@Nullable T version, @Nonnull Consumer<T> consumer);
+
+        /**
+         * Retrieves a string representation of the version.
+         *
+         * @return the string.
+         */
+        @Nonnull
+        String toString ();
 }
