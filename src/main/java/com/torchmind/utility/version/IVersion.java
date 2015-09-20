@@ -38,7 +38,7 @@ public interface IVersion<T extends IVersion> extends Comparable<T> {
         int major ();
 
         /**
-         * Sets the major version bit.
+         * Creates a copy of this version with it's major bit set to {@code value}.
          *
          * @param value the bit.
          * @return the instance.
@@ -55,7 +55,7 @@ public interface IVersion<T extends IVersion> extends Comparable<T> {
         int minor ();
 
         /**
-         * Sets the minor version bit.
+         * Creates a copy of this version with it's minor bit set to {@code value}.
          *
          * @param value the bit.
          * @return the instance.
@@ -108,7 +108,7 @@ public interface IVersion<T extends IVersion> extends Comparable<T> {
         int patch ();
 
         /**
-         * Sets the patch version bit.
+         * Creates a copy of this version with it's patch bit set to {@code value}.
          *
          * @param value the bit.
          * @return the instance.
