@@ -44,7 +44,7 @@ public class SemanticVersion implements IVersion<SemanticVersion> {
         private final String metadata;
         private final UnstableVersionType unstableVersionType;
 
-        private SemanticVersion (@Nonnegative int major, @Nonnegative int minor, @Nonnegative int patch, @Nullable String extra, @Nullable String metadata, @Nullable UnstableVersionType unstableVersionType) {
+        protected SemanticVersion (@Nonnegative int major, @Nonnegative int minor, @Nonnegative int patch, @Nullable String extra, @Nullable String metadata, @Nullable UnstableVersionType unstableVersionType) {
                 this.major = major;
                 this.minor = minor;
                 this.patch = patch;
