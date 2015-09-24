@@ -125,18 +125,20 @@ public final class VersionRange<T extends IVersion<T>> {
          * @return {@code true} if part of this set, {@code false} otherwise.
          */
         public boolean matches (@Nullable T version) {
-                if (this.startBound.newerThan (version)) {
-                        return false;
-                }
-                if (this.endBound.olderThan (version)) {
-                        return false;
-                }
                 if (!this.startInclusive && this.startBound.equals (version)) {
                         return false;
                 }
                 if (!this.endInclusive && this.endBound.equals (version)) {
                         return false;
                 }
+
+                if (this.startBound.newerThan (version)) {
+                        return false;
+                }
+                if (this.endBound.olderThan (version)) {
+                        return false;
+                }
+
                 return true;
         }
 
