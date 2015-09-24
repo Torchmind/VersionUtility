@@ -20,6 +20,7 @@ import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.ThreadSafe;
+import java.util.Optional;
 import java.util.function.Consumer;
 
 /**
@@ -149,6 +150,14 @@ public interface IVersion<T extends IVersion> extends Comparable<T> {
          */
         @Nonnull
         T unstable (@Nonnull Consumer<T> consumer);
+
+        /**
+         * Retrieves the instability type (if any).
+         *
+         * @return the instability.
+         */
+        @Nonnull
+        Optional<UnstableVersionType> unstableVersionType ();
 
         /**
          * Checks whether this version is equal to {@code version}.
