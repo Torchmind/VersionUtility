@@ -904,5 +904,27 @@ public class SemanticVersion implements IVersion<SemanticVersion> {
                                 .metadata (null);
                         // @formatter:on
                 }
+
+                /**
+                 * Sets the unstable version type.
+                 *
+                 * @param unstableVersionType the type.
+                 * @return the builder.
+                 */
+                @Nonnull
+                protected Builder unstableVersionType (@Nullable UnstableVersionType unstableVersionType) {
+                        this.unstableVersionType = unstableVersionType;
+                        return this;
+                }
+
+                /**
+                 * Retrieves the unstable version type (if any).
+                 *
+                 * @return the type.
+                 */
+                @Nullable
+                protected UnstableVersionType unstableVersionType () {
+                        return this.unstableVersionType;
+                }
         }
 }
