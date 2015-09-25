@@ -95,68 +95,7 @@ public class SemanticVersion implements IVersion<SemanticVersion> {
          */
         @Nonnull
         public static Builder builder (@Nonnull String version) throws IllegalArgumentException, NumberFormatException {
-                Builder builder = builder ();
-                String extra = null,
-                        metadata = null;
-
-                // Due to their nature extra and metadata bits will be extracted first and removed from the version
-                // string to simplify further element extraction.
-                // Note that extra and metadata bits may not contain the special characters "-" and "+" as they might
-                // confuse further parsing.
-                {
-                        int extraOffset = version.indexOf ('-');
-                        int metadataOffset = version.indexOf ('+');
-
-                        if (extraOffset != -1) {
-                                extra = version.substring ((extraOffset + 1));
-                        }
-
-                        if (metadataOffset != -1) {
-                                metadata = version.substring ((metadataOffset + 1));
-                        }
-
-                        if (extra != null && metadataOffset > extraOffset) {
-                                extra = extra.substring (0, extra.indexOf ('+'));
-                        } else if (metadata != null && extraOffset > metadataOffset) {
-                                metadata = metadata.substring (0, metadata.indexOf ('-'));
-                        }
-
-                        version = version.substring (0, Math.min ((extraOffset != -1 ? extraOffset : version.length ()), (metadataOffset != -1 ? metadataOffset : version.length ())));
-
-                        // @formatter:off
-                        builder
-                                .extra (extra)
-                                .metadata (metadata);
-                        // @formatter:on
-                }
-
-                // Next up the root version bits (major, minor, patch) are extracted from the remaining version string
-                // using a functional interface is declared here to simplify extraction further.
-                // Note that this method has not been extracted into a separate private method as it is only used within
-                // this specific context and would thus only pollute the overall object scope.
-                {
-                        BiFunction<String, Consumer<Integer>, String> function = (i, c) -> {
-                                if (i.isEmpty ()) {
-                                        return i;
-                                }
-
-                                int offset = i.indexOf ('.');
-
-                                if (offset == -1) {
-                                        c.accept (Integer.parseUnsignedInt (i));
-                                        return "";
-                                }
-
-                                c.accept (Integer.parseUnsignedInt (i.substring (0, offset)));
-                                return i.substring ((offset + 1));
-                        };
-
-                        version = function.apply (version, builder::major);
-                        version = function.apply (version, builder::minor);
-                        function.apply (version, builder::patch);
-                }
-
-                return builder;
+                return builder ().parse (version);
         }
 
         /**
@@ -851,6 +790,79 @@ public class SemanticVersion implements IVersion<SemanticVersion> {
                 @Nonnull
                 public Builder minor (@Nonnegative int minor) {
                         this.minor = minor;
+                        return this;
+                }
+
+                /**
+                 * Resets the builder and parses a version string.
+                 *
+                 * @param version the string.
+                 * @return the builder.
+                 */
+                @Nonnull
+                protected Builder parse (@Nonnull String version) {
+                        this.reset ();
+
+                        String extra = null,
+                                metadata = null;
+
+                        // Due to their nature extra and metadata bits will be extracted first and removed from the version
+                        // string to simplify further element extraction.
+                        // Note that extra and metadata bits may not contain the special characters "-" and "+" as they might
+                        // confuse further parsing.
+                        {
+                                int extraOffset = version.indexOf ('-');
+                                int metadataOffset = version.indexOf ('+');
+
+                                if (extraOffset != -1) {
+                                        extra = version.substring ((extraOffset + 1));
+                                }
+
+                                if (metadataOffset != -1) {
+                                        metadata = version.substring ((metadataOffset + 1));
+                                }
+
+                                if (extra != null && metadataOffset > extraOffset) {
+                                        extra = extra.substring (0, extra.indexOf ('+'));
+                                } else if (metadata != null && extraOffset > metadataOffset) {
+                                        metadata = metadata.substring (0, metadata.indexOf ('-'));
+                                }
+
+                                version = version.substring (0, Math.min ((extraOffset != -1 ? extraOffset : version.length ()), (metadataOffset != -1 ? metadataOffset : version.length ())));
+
+                                // @formatter:off
+                                this
+                                        .extra (extra)
+                                        .metadata (metadata);
+                                // @formatter:on
+                        }
+
+                        // Next up the root version bits (major, minor, patch) are extracted from the remaining version string
+                        // using a functional interface is declared here to simplify extraction further.
+                        // Note that this method has not been extracted into a separate private method as it is only used within
+                        // this specific context and would thus only pollute the overall object scope.
+                        {
+                                BiFunction<String, Consumer<Integer>, String> function = (i, c) -> {
+                                        if (i.isEmpty ()) {
+                                                return i;
+                                        }
+
+                                        int offset = i.indexOf ('.');
+
+                                        if (offset == -1) {
+                                                c.accept (Integer.parseUnsignedInt (i));
+                                                return "";
+                                        }
+
+                                        c.accept (Integer.parseUnsignedInt (i.substring (0, offset)));
+                                        return i.substring ((offset + 1));
+                                };
+
+                                version = function.apply (version, this::major);
+                                version = function.apply (version, this::minor);
+                                function.apply (version, this::patch);
+                        }
+
                         return this;
                 }
 
