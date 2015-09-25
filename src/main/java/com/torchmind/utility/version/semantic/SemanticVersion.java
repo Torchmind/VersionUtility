@@ -801,8 +801,6 @@ public class SemanticVersion implements IVersion<SemanticVersion> {
                  */
                 @Nonnull
                 protected Builder parse (@Nonnull String version) {
-                        this.reset ();
-
                         String extra = null,
                                 metadata = null;
 
