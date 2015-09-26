@@ -160,6 +160,9 @@ public class SemanticVersion implements IVersion<SemanticVersion> {
                 if (thisVersionTypeWrapper.isPresent () && !otherVersionTypeWrapper.isPresent ()) {
                         return -1;
                 }
+                if (!thisVersionTypeWrapper.isPresent ()) {
+                        return 0;
+                }
 
                 // If both values are actually present, version types are compared to sort out version differences
                 // between snapshot, alpha, beta and release candidate versions.
