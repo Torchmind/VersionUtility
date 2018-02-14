@@ -60,15 +60,6 @@
     <url>https://github.com/Torchmind/VersionUtility/issues</url>
   </issueManagement>
 
-  <ciManagement>
-    <system>Bamboo</system>
-    <url>https://www.torchmind.com/ci/browse/UVER</url>
-  </ciManagement>
-
-  <prerequisites>
-    <maven>3.3</maven>
-  </prerequisites>
-
   <scm>
     <url>https://github.com/Torchmind/VersionUtility</url>
     <connection>https://github.com/Torchmind/VersionUtility.git</connection>
@@ -77,26 +68,17 @@
   </scm>
 
   <distributionManagement>
-    <repository>
-      <id>torchmind</id>
-      <url>s3://maven.torchmind.com/release/</url>
-    </repository>
-
     <snapshotRepository>
-      <id>torchmind</id>
-      <url>s3://maven.torchmind.com/snapshot/</url>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
     </snapshotRepository>
+    <repository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
   </distributionManagement>
 
   <!-- Dependencies -->
-  <repositories>
-    <repository>
-      <id>torchmind</id>
-      <name>Torchmind Public</name>
-      <url>https://maven.torchmind.com/release/</url>
-    </repository>
-  </repositories>
-
   <dependencies>
     <!-- External Dependencies -->
     <dependency>
@@ -200,13 +182,32 @@
         </plugin>
       </plugins>
     </pluginManagement>
-
-    <extensions>
-      <extension>
-        <groupId>org.springframework.build</groupId>
-        <artifactId>aws-maven</artifactId>
-        <version>5.0.0.RELEASE</version>
-      </extension>
-    </extensions>
   </build>
+
+  <profiles>
+    <profile>
+      <id>deployment</id>
+
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.6</version>
+
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>
