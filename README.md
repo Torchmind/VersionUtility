@@ -30,16 +30,16 @@ When running maven you may simply add a new dependency along with our repository
 
 ```xml
 <repository>
-        <id>torchmind</id>
-        <url>https://maven.torchmind.com/snapshot/</url>
+  <id>torchmind</id>
+  <url>https://maven.torchmind.com/snapshot/</url>
 </repository>
 
 <dependencies>
-        <dependency>
-                <groupId>com.torchmind.utility</groupId>
-                <artifactId>version</artifactId>
-                <version>2.0-SNAPSHOT</version>
-        </dependency>
+  <dependency>
+    <groupId>com.torchmind.utility</groupId>
+    <artifactId>version</artifactId>
+    <version>2.0-SNAPSHOT</version>
+  </dependency>
 </dependencies>
 ```
 
@@ -55,7 +55,7 @@ IVersion version1 = ...;
 IVersion version2 = ...;
 
 if (version2.isNewerThan (version1)) {
-        // Update application or something
+  // Update application or something
 }
 ```
 
@@ -76,7 +76,7 @@ VersionRange range = ...;
 IVersion version = ...;
 
 if (range.matches (version)) {
-        // Dependency satisfied or something
+  // Dependency satisfied or something
 }
 
 // OR
