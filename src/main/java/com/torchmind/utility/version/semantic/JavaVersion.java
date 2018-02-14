@@ -32,6 +32,7 @@ public final class JavaVersion extends SemanticVersion {
   public static final JavaVersion JAVA_1_6 = new JavaVersion(1, 6, 0, null, null, null, 0);
   public static final JavaVersion JAVA_1_7 = new JavaVersion(1, 7, 0, null, null, null, 0);
   public static final JavaVersion JAVA_1_8 = new JavaVersion(1, 8, 0, null, null, null, 0);
+  public static final JavaVersion JAVA_9 = new JavaVersion(9, 0, 0, null, null, null, 0);
 
   private final int updateNumber;
 

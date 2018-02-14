@@ -81,8 +81,9 @@ public class JavaVersionTest {
     Assert.assertTrue(current.newerThan(JavaVersion.JAVA_1_5));
     Assert.assertTrue(current.newerThan(JavaVersion.JAVA_1_6));
     Assert.assertTrue(current.newerThan(JavaVersion.JAVA_1_7));
-    Assert.assertTrue((current.newerThan(JavaVersion.JAVA_1_8) || current
-        .equals(JavaVersion.JAVA_1_8))); // Else you are a magician or shit broke ...
+    Assert.assertTrue(current.newerThan(JavaVersion.JAVA_1_8));
+    Assert.assertTrue(current.newerThan(JavaVersion.JAVA_1_9) || current
+        .equals(JavaVersion.JAVA_1_9));// Else you are a magician or shit broke ...
   }
 
   /**
