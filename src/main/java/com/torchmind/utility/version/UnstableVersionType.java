@@ -19,7 +19,6 @@ package com.torchmind.utility.version;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
@@ -28,7 +27,7 @@ import javax.annotation.Nullable;
  *
  * @author Johannes Donath
  */
-public enum UnstableVersionType implements Comparable<UnstableVersionType> {
+public enum UnstableVersionType {
   UNKNOWN,
   SNAPSHOT("snapshot"),
   ALPHA("a", "alpha"),
@@ -66,10 +65,7 @@ public enum UnstableVersionType implements Comparable<UnstableVersionType> {
    * @return The version type.
    */
   @Nonnull
-  public static Optional<UnstableVersionType> byAlias(@Nullable String alias) {
-    if (alias == null) {
-      return Optional.empty();
-    }
-    return Optional.of(aliasMap.getOrDefault(alias, UNKNOWN));
+  public static UnstableVersionType byAlias(@Nullable String alias) {
+    return aliasMap.getOrDefault(alias, UNKNOWN);
   }
 }

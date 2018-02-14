@@ -17,6 +17,7 @@
 package com.torchmind.utility.version.semantic;
 
 import com.torchmind.utility.version.UnstableVersionType;
+import java.util.Objects;
 import java.util.function.Consumer;
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
@@ -25,8 +26,7 @@ import javax.annotation.concurrent.NotThreadSafe;
 import javax.annotation.concurrent.ThreadSafe;
 
 /**
- * Provides a wrapper around {@link com.torchmind.utility.version.semantic.SemanticVersion} for
- * working with Java versions.
+ * Provides a wrapper around {@link SemanticVersion} for working with Java versions.
  *
  * @author Johannes Donath
  */
@@ -48,7 +48,7 @@ public final class JavaVersion extends SemanticVersion {
   }
 
   /**
-   * Retrieves a new {@link com.torchmind.utility.version.semantic.JavaVersion.Builder} instance.
+   * Retrieves a new {@link Builder} instance.
    *
    * @return the builder.
    */
@@ -58,37 +58,33 @@ public final class JavaVersion extends SemanticVersion {
   }
 
   /**
-   * Retrieves a new {@link com.torchmind.utility.version.semantic.JavaVersion.Builder} representing the values
-   * of {@code version}.
+   * Retrieves a new {@link Builder} representing the values of {@code version}.
    *
    * @param version the version to copy from.
    * @return the builder.
    */
   @Nonnull
   public static Builder builder(@Nonnull JavaVersion version) {
-    // @formatter:off
-                return builder ()
-                        .major (version.major ())
-                        .minor (version.minor ())
-                        .patch (version.patch ())
-                        .updateNumber (version.updateNumber ())
-                        .extra (version.extra ())
-                        .metadata (version.metadata ());
-                // @formatter:on
+    return builder()
+        .major(version.major())
+        .minor(version.minor())
+        .patch(version.patch())
+        .updateNumber(version.updateNumber())
+        .extra(version.extra())
+        .metadata(version.metadata());
   }
 
   /**
-   * Parses a version string and creates a {@link com.torchmind.utility.version.semantic.JavaVersion.Builder}
-   * that represents the version.
+   * Parses a version string and creates a {@link Builder} that represents the version.
    *
    * @param version the version.
    * @return the builder.
-   * @throws java.lang.IllegalArgumentException when the passed version has an invalid format.
-   * @throws java.lang.NumberFormatException when one or more elements contain invalid numbers.
+   * @throws IllegalArgumentException when the passed version has an invalid format.
+   * @throws NumberFormatException when one or more elements contain invalid numbers.
    */
   @Nonnull
   public static Builder builder(@Nonnull String version)
-      throws IllegalArgumentException, NumberFormatException {
+      throws IllegalArgumentException {
     return builder().parse(version);
   }
 
@@ -103,8 +99,7 @@ public final class JavaVersion extends SemanticVersion {
   }
 
   /**
-   * Parses the current Java version and creates a {@link com.torchmind.utility.version.semantic.JavaVersion.Builder}
-   * that represents the version.
+   * Parses the current Java version and creates a {@link Builder} that represents the version.
    *
    * @return the builder.
    */
@@ -118,12 +113,12 @@ public final class JavaVersion extends SemanticVersion {
    *
    * @param version the string.
    * @return the version.
-   * @throws java.lang.IllegalArgumentException when the passed version has an invalid format.
-   * @throws java.lang.NumberFormatException when one or more elements contain invalid numbers.
+   * @throws IllegalArgumentException when the passed version has an invalid format.
+   * @throws NumberFormatException when one or more elements contain invalid numbers.
    */
   @Nonnull
   public static JavaVersion of(@Nonnull String version)
-      throws IllegalArgumentException, NumberFormatException {
+      throws IllegalArgumentException {
     return builder(version).build();
   }
 
@@ -131,7 +126,7 @@ public final class JavaVersion extends SemanticVersion {
    * {@inheritDoc}
    */
   @Override
-  public int compareTo(@Nullable SemanticVersion version) {
+  public int compareTo(@Nonnull SemanticVersion version) {
     if (version instanceof JavaVersion) {
       return this.compareTo(((JavaVersion) version));
     }
@@ -147,6 +142,7 @@ public final class JavaVersion extends SemanticVersion {
    */
   public int compareTo(@Nullable JavaVersion version) {
     int semanticComparison = super.compareTo(version);
+
     if (semanticComparison != 0) {
       return semanticComparison;
     }
@@ -191,11 +187,8 @@ public final class JavaVersion extends SemanticVersion {
       return true;
     }
 
-    if (this.updateNumber() != version.updateNumber()) {
-      return false;
-    }
+    return this.updateNumber() == version.updateNumber() && super.equals(version);
 
-    return super.equals(version);
   }
 
   /**
@@ -299,6 +292,32 @@ public final class JavaVersion extends SemanticVersion {
   }
 
   /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || this.getClass() != o.getClass()) {
+      return false;
+    }
+    if (!super.equals(o)) {
+      return false;
+    }
+    JavaVersion that = (JavaVersion) o;
+    return this.updateNumber == that.updateNumber;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public int hashCode() {
+    return Objects.hash(super.hashCode(), this.updateNumber);
+  }
+
+  /**
    * Retrieves the update number.
    *
    * @return the number.
@@ -317,7 +336,6 @@ public final class JavaVersion extends SemanticVersion {
     private int updateNumber;
 
     protected Builder() {
-      super();
     }
 
     /**

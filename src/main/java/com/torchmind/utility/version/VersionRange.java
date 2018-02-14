@@ -48,7 +48,7 @@ public final class VersionRange<T extends IVersion<T>> {
   }
 
   /**
-   * Retrieves a new {@link com.torchmind.utility.version.VersionRange.Builder}.
+   * Retrieves a new {@link Builder}.
    *
    * @param <T> the version type.
    * @return the builder.
@@ -59,8 +59,7 @@ public final class VersionRange<T extends IVersion<T>> {
   }
 
   /**
-   * Retrieves a new {@link com.torchmind.utility.version.VersionRange.Builder} that replicates the
-   * bounds of {@code range}.
+   * Retrieves a new {@link Builder} that replicates the bounds of {@code range}.
    *
    * @param range the range.
    * @param <T> the range version type.
@@ -68,13 +67,11 @@ public final class VersionRange<T extends IVersion<T>> {
    */
   @Nonnull
   public static <T extends IVersion<T>> Builder<T> builder(@Nonnull VersionRange<T> range) {
-    // @formatter:off
-                return VersionRange.<T>builder ()
-                                .startBound (range.startBound ())
-                                .startInclusive (range.startInclusive ())
-                                .endBound (range.endBound ())
-                                .endInclusive (range.endInclusive ());
-                // @formatter:on
+    return VersionRange.<T>builder()
+        .startBound(range.startBound())
+        .startInclusive(range.startInclusive())
+        .endBound(range.endBound())
+        .endInclusive(range.endInclusive());
   }
 
   /**
@@ -128,7 +125,7 @@ public final class VersionRange<T extends IVersion<T>> {
     if (this == object) {
       return true;
     }
-    if (object == null || getClass() != object.getClass()) {
+    if (object == null || this.getClass() != object.getClass()) {
       return false;
     }
 
@@ -137,19 +134,19 @@ public final class VersionRange<T extends IVersion<T>> {
     }
     VersionRange<T> that = (VersionRange<T>) object;
 
-    if (startInclusive != that.startInclusive) {
+    if (this.startInclusive != that.startInclusive) {
       return false;
     }
 
-    if (endInclusive != that.endInclusive) {
+    if (this.endInclusive != that.endInclusive) {
       return false;
     }
 
-    if (!startBound.equals(that.startBound)) {
+    if (!this.startBound.equals(that.startBound)) {
       return false;
     }
 
-    return endBound.equals(that.endBound);
+    return this.endBound.equals(that.endBound);
 
   }
 
@@ -158,10 +155,10 @@ public final class VersionRange<T extends IVersion<T>> {
    */
   @Override
   public int hashCode() {
-    int result = startBound.hashCode();
-    result = 31 * result + endBound.hashCode();
-    result = 31 * result + (startInclusive ? 1 : 0);
-    result = 31 * result + (endInclusive ? 1 : 0);
+    int result = this.startBound.hashCode();
+    result = 31 * result + this.endBound.hashCode();
+    result = 31 * result + (this.startInclusive ? 1 : 0);
+    result = 31 * result + (this.endInclusive ? 1 : 0);
     return result;
   }
 
@@ -179,14 +176,7 @@ public final class VersionRange<T extends IVersion<T>> {
       return false;
     }
 
-    if (this.startBound.newerThan(version)) {
-      return false;
-    }
-    if (this.endBound.olderThan(version)) {
-      return false;
-    }
-
-    return true;
+    return !this.startBound.newerThan(version) && !this.endBound.olderThan(version);
   }
 
   /**
@@ -212,11 +202,9 @@ public final class VersionRange<T extends IVersion<T>> {
    */
   @Nonnull
   public Set<T> matching(@Nonnull Set<T> versions) {
-    // @formatter:off
-                return versions.stream ()
-                               .filter (this::matches)
-                                        .collect (Collectors.toSet ());
-                // @formatter:on
+    return versions.stream()
+        .filter(this::matches)
+        .collect(Collectors.toSet());
   }
 
   /**
@@ -262,7 +250,7 @@ public final class VersionRange<T extends IVersion<T>> {
   }
 
   /**
-   * Provides a factory for {@link com.torchmind.utility.version.VersionRange} instances.
+   * Provides a factory for {@link VersionRange} instances.
    *
    * @param <T> the version type.
    */
@@ -278,11 +266,11 @@ public final class VersionRange<T extends IVersion<T>> {
     }
 
     /**
-     * Builds an instance of {@link com.torchmind.utility.version.VersionRange} and resets the builder.
+     * Builds an instance of {@link VersionRange} and resets the builder.
      *
      * @return the range.
-     *
-     * @throws java.lang.IllegalStateException when {@code startBound} or {@code endBound} are null.
+     * @throws java.lang.IllegalStateException when {@code startBound} or {@code endBound} are
+     * null.
      */
     @Nonnull
     public VersionRange<T> build() throws IllegalStateException {
@@ -335,7 +323,8 @@ public final class VersionRange<T extends IVersion<T>> {
     /**
      * Sets whether the ending bound is part of the range.
      *
-     * @param endInclusive if {@code true}, the bound is part of the range, if {@code false} it is excluded.
+     * @param endInclusive if {@code true}, the bound is part of the range, if {@code false} it is
+     * excluded.
      * @return the builder.
      */
     @Nonnull
@@ -351,14 +340,11 @@ public final class VersionRange<T extends IVersion<T>> {
      */
     @Nonnull
     public Builder<T> reset() {
-      // @formatter:off
-                        return this
-                                .startBound (null)
-                                .startInclusive (true)
-
-                                .endBound (null)
-                                .endInclusive (false);
-                        // @formatter:on
+      return this
+          .startBound(null)
+          .startInclusive(true)
+          .endBound(null)
+          .endInclusive(false);
     }
 
     /**

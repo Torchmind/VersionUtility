@@ -33,14 +33,6 @@ import javax.annotation.concurrent.ThreadSafe;
 public interface IVersion<T extends IVersion> extends Comparable<T> {
 
   /**
-   * Checks whether this version is equal to {@code version}.
-   *
-   * @param version the version to compare to.
-   * @return {@code true} if equal to {@code version}, {@code false} otherwise.
-   */
-  boolean equals(@Nullable T version);
-
-  /**
    * Executes {@code consumer} if this version is equal to {@code version}.
    *
    * @param version the version to compare to.
