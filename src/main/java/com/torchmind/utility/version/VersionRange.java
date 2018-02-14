@@ -16,14 +16,11 @@
  */
 package com.torchmind.utility.version;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
+import edu.umd.cs.findbugs.annotations.Nullable;
 import java.util.Collection;
 import java.util.Set;
-import java.util.function.Consumer;
 import java.util.stream.Collectors;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.concurrent.NotThreadSafe;
-import javax.annotation.concurrent.ThreadSafe;
 
 /**
  * Represents a range between two versions.
@@ -31,7 +28,6 @@ import javax.annotation.concurrent.ThreadSafe;
  * @param <T> the version type.
  * @author Johannes Donath
  */
-@ThreadSafe
 public final class VersionRange<T extends Version<T>> {
 
   private final T endBound;
@@ -39,7 +35,7 @@ public final class VersionRange<T extends Version<T>> {
   private final T startBound;
   private final boolean startInclusive;
 
-  private VersionRange(@Nonnull T startBound, boolean startInclusive, @Nonnull T endBound,
+  private VersionRange(@NonNull T startBound, boolean startInclusive, @NonNull T endBound,
       boolean endInclusive) {
     this.startBound = startBound;
     this.startInclusive = startInclusive;
@@ -54,7 +50,7 @@ public final class VersionRange<T extends Version<T>> {
    * @param <T> the version type.
    * @return the builder.
    */
-  @Nonnull
+  @NonNull
   public static <T extends Version<T>> Builder<T> builder() {
     return (new Builder<>());
   }
@@ -66,8 +62,8 @@ public final class VersionRange<T extends Version<T>> {
    * @param <T> the range version type.
    * @return the builder.
    */
-  @Nonnull
-  public static <T extends Version<T>> Builder<T> builder(@Nonnull VersionRange<T> range) {
+  @NonNull
+  public static <T extends Version<T>> Builder<T> builder(@NonNull VersionRange<T> range) {
     return VersionRange.<T>builder()
         .startBound(range.startBound())
         .startInclusive(range.startInclusive())
@@ -80,7 +76,7 @@ public final class VersionRange<T extends Version<T>> {
    *
    * @return the ending version.
    */
-  @Nonnull
+  @NonNull
   public T endBound() {
     return this.endBound;
   }
@@ -91,8 +87,8 @@ public final class VersionRange<T extends Version<T>> {
    * @param endBound the ending version.
    * @return the mutated copy.
    */
-  @Nonnull
-  public VersionRange<T> endBound(@Nonnull T endBound) {
+  @NonNull
+  public VersionRange<T> endBound(@NonNull T endBound) {
     return builder(this).endBound(endBound).build();
   }
 
@@ -112,7 +108,7 @@ public final class VersionRange<T extends Version<T>> {
    * @param value the value.
    * @return the mutated copy.
    */
-  @Nonnull
+  @NonNull
   public VersionRange<T> endInclusive(boolean value) {
     return builder(this).endInclusive(value).build();
   }
@@ -140,8 +136,8 @@ public final class VersionRange<T extends Version<T>> {
    * @param versions the original set.
    * @return the matching set.
    */
-  @Nonnull
-  public Set<T> matching(@Nonnull Collection<T> versions) {
+  @NonNull
+  public Set<T> matching(@NonNull Collection<T> versions) {
     return versions.stream()
         .filter(this::matches)
         .collect(Collectors.toSet());
@@ -152,7 +148,7 @@ public final class VersionRange<T extends Version<T>> {
    *
    * @return the starting version.
    */
-  @Nonnull
+  @NonNull
   public T startBound() {
     return this.startBound;
   }
@@ -163,8 +159,8 @@ public final class VersionRange<T extends Version<T>> {
    * @param startBound the starting version.
    * @return the mutated copy.
    */
-  @Nonnull
-  public VersionRange<T> startBound(@Nonnull T startBound) {
+  @NonNull
+  public VersionRange<T> startBound(@NonNull T startBound) {
     return builder(this).startBound(startBound).build();
   }
 
@@ -184,7 +180,7 @@ public final class VersionRange<T extends Version<T>> {
    * @param value the value.
    * @return the mutated copy.
    */
-  @Nonnull
+  @NonNull
   public VersionRange<T> startInclusive(boolean value) {
     return builder(this).startInclusive(value).build();
   }
@@ -235,7 +231,6 @@ public final class VersionRange<T extends Version<T>> {
    *
    * @param <T> the version type.
    */
-  @NotThreadSafe
   public static final class Builder<T extends Version<T>> {
 
     private T endBound;
@@ -253,7 +248,7 @@ public final class VersionRange<T extends Version<T>> {
      * @throws java.lang.IllegalStateException when {@code startBound} or {@code endBound} are
      * null.
      */
-    @Nonnull
+    @NonNull
     public VersionRange<T> build() throws IllegalStateException {
       if (this.startBound == null) {
         throw new IllegalStateException("Missing starting bound");
@@ -286,7 +281,7 @@ public final class VersionRange<T extends Version<T>> {
      * @param endBound the bound.
      * @return the builder.
      */
-    @Nonnull
+    @NonNull
     public Builder<T> endBound(@Nullable T endBound) {
       this.endBound = endBound;
       return this;
@@ -308,7 +303,7 @@ public final class VersionRange<T extends Version<T>> {
      * excluded.
      * @return the builder.
      */
-    @Nonnull
+    @NonNull
     public Builder<T> endInclusive(boolean endInclusive) {
       this.endInclusive = endInclusive;
       return this;
@@ -319,7 +314,7 @@ public final class VersionRange<T extends Version<T>> {
      *
      * @return the builder.
      */
-    @Nonnull
+    @NonNull
     public Builder<T> reset() {
       return this
           .startBound(null)
@@ -344,7 +339,7 @@ public final class VersionRange<T extends Version<T>> {
      * @param startBound the bound.
      * @return the builder.
      */
-    @Nonnull
+    @NonNull
     public Builder<T> startBound(@Nullable T startBound) {
       this.startBound = startBound;
       return this;

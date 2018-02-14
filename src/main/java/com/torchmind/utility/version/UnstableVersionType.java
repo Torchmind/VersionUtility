@@ -19,8 +19,8 @@ package com.torchmind.utility.version;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import edu.umd.cs.findbugs.annotations.NonNull;
+import edu.umd.cs.findbugs.annotations.Nullable;
 
 /**
  * Provides a list of valid unstable version types.
@@ -64,7 +64,7 @@ public enum UnstableVersionType {
    * @param alias The alias.
    * @return The version type.
    */
-  @Nonnull
+  @NonNull
   public static UnstableVersionType byAlias(@Nullable String alias) {
     return aliasMap.getOrDefault(alias, UNKNOWN);
   }

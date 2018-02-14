@@ -19,21 +19,17 @@ package com.torchmind.utility.version.semantic;
 import com.torchmind.utility.version.UnstableVersionType;
 import com.torchmind.utility.version.Version;
 import com.torchmind.utility.version.VersionRange;
+import edu.umd.cs.findbugs.annotations.NonNull;
+import edu.umd.cs.findbugs.annotations.Nullable;
 import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
-import javax.annotation.Nonnegative;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.concurrent.NotThreadSafe;
-import javax.annotation.concurrent.ThreadSafe;
 
 /**
  * Represents a semantic version.
  *
  * @author Johannes Donath
  */
-@ThreadSafe
 public class SemanticVersion implements Version<SemanticVersion> {
 
   private final String extra;
@@ -43,7 +39,10 @@ public class SemanticVersion implements Version<SemanticVersion> {
   private final int patch;
   private final UnstableVersionType unstableVersionType;
 
-  protected SemanticVersion(@Nonnegative int major, @Nonnegative int minor, @Nonnegative int patch,
+  protected SemanticVersion(
+      int major,
+      int minor,
+      int patch,
       @Nullable String extra, @Nullable String metadata,
       @Nullable UnstableVersionType unstableVersionType) {
     this.major = major;
@@ -60,7 +59,7 @@ public class SemanticVersion implements Version<SemanticVersion> {
    *
    * @return the builder.
    */
-  @Nonnull
+  @NonNull
   public static Builder builder() {
     return (new Builder());
   }
@@ -71,8 +70,8 @@ public class SemanticVersion implements Version<SemanticVersion> {
    * @param version the version to replicate.
    * @return the builder.
    */
-  @Nonnull
-  public static Builder builder(@Nonnull SemanticVersion version) {
+  @NonNull
+  public static Builder builder(@NonNull SemanticVersion version) {
     return builder()
         .major(version.major())
         .minor(version.minor())
@@ -89,8 +88,8 @@ public class SemanticVersion implements Version<SemanticVersion> {
    * @throws IllegalArgumentException when one or more bits are not within SemVer bounds.
    * @throws NumberFormatException when one or more numeric bits have invalid values.
    */
-  @Nonnull
-  public static Builder builder(@Nonnull String version)
+  @NonNull
+  public static Builder builder(@NonNull String version)
       throws IllegalArgumentException {
     return builder().parse(version);
   }
@@ -103,8 +102,8 @@ public class SemanticVersion implements Version<SemanticVersion> {
    * @throws IllegalArgumentException when one or more bits are not within SemVer bounds.
    * @throws NumberFormatException when one or more numeric bits have invalid values.
    */
-  @Nonnull
-  public static SemanticVersion of(@Nonnull String version)
+  @NonNull
+  public static SemanticVersion of(@NonNull String version)
       throws IllegalArgumentException {
     // @formatter:off
                 return builder (version)
@@ -119,9 +118,9 @@ public class SemanticVersion implements Version<SemanticVersion> {
    * @param version2 the ending bound.
    * @return the range.
    */
-  @Nonnull
-  public static VersionRange<SemanticVersion> range(@Nonnull SemanticVersion version1,
-      @Nonnull SemanticVersion version2) {
+  @NonNull
+  public static VersionRange<SemanticVersion> range(@NonNull SemanticVersion version1,
+      @NonNull SemanticVersion version2) {
     return VersionRange.<SemanticVersion>builder()
         .startBound(version1)
         .endBound(version2)
@@ -135,9 +134,9 @@ public class SemanticVersion implements Version<SemanticVersion> {
    * @param version2 the ending bound.
    * @return the range.
    */
-  @Nonnull
-  public static VersionRange<SemanticVersion> range(@Nonnull String version1,
-      @Nonnull String version2) {
+  @NonNull
+  public static VersionRange<SemanticVersion> range(@NonNull String version1,
+      @NonNull String version2) {
     return range(of(version1), of(version2));
   }
 
@@ -150,8 +149,8 @@ public class SemanticVersion implements Version<SemanticVersion> {
    * @throws IllegalArgumentException when the range or one of the version strings is invalid.
    * @throws NumberFormatException when one or more bits are invalid.
    */
-  @Nonnull
-  public static VersionRange<SemanticVersion> range(@Nonnull String range)
+  @NonNull
+  public static VersionRange<SemanticVersion> range(@NonNull String range)
       throws IllegalArgumentException {
     VersionRange.Builder<SemanticVersion> builder = VersionRange.<SemanticVersion>builder();
 
@@ -347,7 +346,7 @@ public class SemanticVersion implements Version<SemanticVersion> {
    * @param value the bit.
    * @return the mutated version.
    */
-  @Nonnull
+  @NonNull
   public SemanticVersion extra(@Nullable String value) {
     return builder(this)
         .extra(value)
@@ -359,7 +358,6 @@ public class SemanticVersion implements Version<SemanticVersion> {
    *
    * @return the bit.
    */
-  @Nonnegative
   public int extraRevision() {
     String extra = this.extra();
 
@@ -398,7 +396,6 @@ public class SemanticVersion implements Version<SemanticVersion> {
    * {@inheritDoc}
    */
   @Override
-  @Nonnegative
   public int major() {
     return this.major;
   }
@@ -406,9 +403,9 @@ public class SemanticVersion implements Version<SemanticVersion> {
   /**
    * {@inheritDoc}
    */
-  @Nonnull
+  @NonNull
   @Override
-  public SemanticVersion major(@Nonnegative int value) {
+  public SemanticVersion major(int value) {
     return builder(this)
         .major(value)
         .build();
@@ -430,7 +427,7 @@ public class SemanticVersion implements Version<SemanticVersion> {
    * @param value the bit.
    * @return the mutated version.
    */
-  @Nonnull
+  @NonNull
   public SemanticVersion metadata(@Nullable String value) {
     return builder(this)
         .metadata(value)
@@ -441,7 +438,6 @@ public class SemanticVersion implements Version<SemanticVersion> {
    * {@inheritDoc}
    */
   @Override
-  @Nonnegative
   public int minor() {
     return this.minor;
   }
@@ -449,9 +445,9 @@ public class SemanticVersion implements Version<SemanticVersion> {
   /**
    * {@inheritDoc}
    */
-  @Nonnull
+  @NonNull
   @Override
-  public SemanticVersion minor(@Nonnegative int value) {
+  public SemanticVersion minor(int value) {
     return builder(this)
         .minor(value)
         .build();
@@ -477,7 +473,6 @@ public class SemanticVersion implements Version<SemanticVersion> {
    * {@inheritDoc}
    */
   @Override
-  @Nonnegative
   public int patch() {
     return this.patch;
   }
@@ -485,9 +480,9 @@ public class SemanticVersion implements Version<SemanticVersion> {
   /**
    * {@inheritDoc}
    */
-  @Nonnull
+  @NonNull
   @Override
-  public SemanticVersion patch(@Nonnegative int value) {
+  public SemanticVersion patch(int value) {
     return builder(this)
         .patch(value)
         .build();
@@ -504,7 +499,7 @@ public class SemanticVersion implements Version<SemanticVersion> {
   /**
    * {@inheritDoc}
    */
-  @Nonnull
+  @NonNull
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
@@ -546,7 +541,7 @@ public class SemanticVersion implements Version<SemanticVersion> {
   /**
    * {@inheritDoc}
    */
-  @Nonnull
+  @NonNull
   @Override
   public Optional<UnstableVersionType> unstableVersionType() {
     return Optional.ofNullable(this.unstableVersionType);
@@ -555,7 +550,6 @@ public class SemanticVersion implements Version<SemanticVersion> {
   /**
    * Provides a factory for {@link SemanticVersion} instances.
    */
-  @NotThreadSafe
   public static class Builder {
 
     private String extra;
@@ -573,7 +567,7 @@ public class SemanticVersion implements Version<SemanticVersion> {
      *
      * @return the version.
      */
-    @Nonnull
+    @NonNull
     public SemanticVersion build() {
       try {
         return (new SemanticVersion(this.major(), this.minor(), this.patch(), this.extra(),
@@ -600,7 +594,7 @@ public class SemanticVersion implements Version<SemanticVersion> {
      * @return the builder.
      * @throws IllegalArgumentException when an invalid character is present.
      */
-    @Nonnull
+    @NonNull
     public Builder extra(@Nullable String extra) throws IllegalArgumentException {
       // To shorten the code path the version type is determined early on during building and passed
       // along to new version objects.
@@ -635,7 +629,6 @@ public class SemanticVersion implements Version<SemanticVersion> {
      *
      * @return the bit.
      */
-    @Nonnegative
     public int major() {
       return this.major;
     }
@@ -646,8 +639,8 @@ public class SemanticVersion implements Version<SemanticVersion> {
      * @param major the bit.
      * @return the builder.
      */
-    @Nonnull
-    public Builder major(@Nonnegative int major) {
+    @NonNull
+    public Builder major(int major) {
       this.major = major;
       return this;
     }
@@ -669,7 +662,7 @@ public class SemanticVersion implements Version<SemanticVersion> {
      * @return the builder.
      * @throws IllegalArgumentException when an invalid character is present.
      */
-    @Nonnull
+    @NonNull
     public Builder metadata(@Nullable String metadata) throws IllegalArgumentException {
       // Generally extra and metadata elements may not contain the special characters "-" and "+" as
       // they may break parsing later on. Thus all strings passed that contain one or more of these
@@ -692,7 +685,6 @@ public class SemanticVersion implements Version<SemanticVersion> {
      *
      * @return the bit.
      */
-    @Nonnegative
     public int minor() {
       return this.minor;
     }
@@ -703,8 +695,8 @@ public class SemanticVersion implements Version<SemanticVersion> {
      * @param minor the bit.
      * @return the builder.
      */
-    @Nonnull
-    public Builder minor(@Nonnegative int minor) {
+    @NonNull
+    public Builder minor(int minor) {
       this.minor = minor;
       return this;
     }
@@ -715,8 +707,8 @@ public class SemanticVersion implements Version<SemanticVersion> {
      * @param version the string.
      * @return the builder.
      */
-    @Nonnull
-    protected Builder parse(@Nonnull String version) {
+    @NonNull
+    protected Builder parse(@NonNull String version) {
       String extra = null;
       String metadata = null;
 
@@ -785,7 +777,6 @@ public class SemanticVersion implements Version<SemanticVersion> {
      *
      * @return the bit.
      */
-    @Nonnegative
     public int patch() {
       return this.patch;
     }
@@ -796,8 +787,8 @@ public class SemanticVersion implements Version<SemanticVersion> {
      * @param patch the bit.
      * @return the builder.
      */
-    @Nonnull
-    public Builder patch(@Nonnegative int patch) {
+    @NonNull
+    public Builder patch(int patch) {
       this.patch = patch;
       return this;
     }
@@ -807,7 +798,7 @@ public class SemanticVersion implements Version<SemanticVersion> {
      *
      * @return the builder.
      */
-    @Nonnull
+    @NonNull
     public Builder reset() {
       return this
           .major(0)
@@ -823,7 +814,7 @@ public class SemanticVersion implements Version<SemanticVersion> {
      * @param unstableVersionType the type.
      * @return the builder.
      */
-    @Nonnull
+    @NonNull
     protected Builder unstableVersionType(@Nullable UnstableVersionType unstableVersionType) {
       this.unstableVersionType = unstableVersionType;
       return this;

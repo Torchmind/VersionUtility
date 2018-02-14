@@ -17,10 +17,8 @@
 package com.torchmind.utility.version;
 
 import java.util.Optional;
-import javax.annotation.Nonnegative;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.concurrent.ThreadSafe;
+import edu.umd.cs.findbugs.annotations.NonNull;
+import edu.umd.cs.findbugs.annotations.Nullable;
 
 /**
  * Represents a version.
@@ -28,7 +26,6 @@ import javax.annotation.concurrent.ThreadSafe;
  * @param <T> the implementing type.
  * @author Johannes Donath
  */
-@ThreadSafe
 public interface Version<T extends Version> extends Comparable<T> {
 
   /**
@@ -36,7 +33,6 @@ public interface Version<T extends Version> extends Comparable<T> {
    *
    * @return the bit.
    */
-  @Nonnegative
   int major();
 
   /**
@@ -45,15 +41,14 @@ public interface Version<T extends Version> extends Comparable<T> {
    * @param value the bit.
    * @return the instance.
    */
-  @Nonnull
-  T major(@Nonnegative int value);
+  @NonNull
+  T major(int value);
 
   /**
    * Retrieves the minor version bit.
    *
    * @return the bit.
    */
-  @Nonnegative
   int minor();
 
   /**
@@ -62,8 +57,8 @@ public interface Version<T extends Version> extends Comparable<T> {
    * @param value the bit.
    * @return the instance.
    */
-  @Nonnull
-  T minor(@Nonnegative int value);
+  @NonNull
+  T minor(int value);
 
   /**
    * Checks whether this version is newer than {@code version}.
@@ -86,7 +81,6 @@ public interface Version<T extends Version> extends Comparable<T> {
    *
    * @return the bit.
    */
-  @Nonnegative
   int patch();
 
   /**
@@ -95,8 +89,8 @@ public interface Version<T extends Version> extends Comparable<T> {
    * @param value the bit.
    * @return the instance.
    */
-  @Nonnull
-  T patch(@Nonnegative int value);
+  @NonNull
+  T patch(int value);
 
   /**
    * Checks whether this version is stable.
@@ -117,7 +111,7 @@ public interface Version<T extends Version> extends Comparable<T> {
    *
    * @return the instability.
    */
-  @Nonnull
+  @NonNull
   Optional<UnstableVersionType> unstableVersionType();
 
   /**
@@ -125,6 +119,6 @@ public interface Version<T extends Version> extends Comparable<T> {
    *
    * @return the string.
    */
-  @Nonnull
+  @NonNull
   String toString();
 }

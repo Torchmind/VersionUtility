@@ -17,20 +17,15 @@
 package com.torchmind.utility.version.semantic;
 
 import com.torchmind.utility.version.UnstableVersionType;
+import edu.umd.cs.findbugs.annotations.NonNull;
+import edu.umd.cs.findbugs.annotations.Nullable;
 import java.util.Objects;
-import java.util.function.Consumer;
-import javax.annotation.Nonnegative;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.concurrent.NotThreadSafe;
-import javax.annotation.concurrent.ThreadSafe;
 
 /**
  * Provides a wrapper around {@link SemanticVersion} for working with Java versions.
  *
  * @author Johannes Donath
  */
-@ThreadSafe
 public final class JavaVersion extends SemanticVersion {
 
   public static final JavaVersion JAVA_1_5 = new JavaVersion(1, 5, 0, null, null, null, 0);
@@ -40,9 +35,11 @@ public final class JavaVersion extends SemanticVersion {
 
   private final int updateNumber;
 
-  protected JavaVersion(@Nonnegative int major, @Nonnegative int minor, @Nonnegative int patch,
-      @Nullable String extra, @Nullable String metadata,
-      @Nullable UnstableVersionType unstableVersionType, @Nonnegative int updateNumber) {
+  protected JavaVersion(int major, int minor, int patch,
+      @Nullable String extra,
+      @Nullable String metadata,
+      @Nullable UnstableVersionType unstableVersionType,
+      int updateNumber) {
     super(major, minor, patch, extra, metadata, unstableVersionType);
     this.updateNumber = updateNumber;
   }
@@ -52,7 +49,7 @@ public final class JavaVersion extends SemanticVersion {
    *
    * @return the builder.
    */
-  @Nonnull
+  @NonNull
   public static Builder builder() {
     return (new Builder());
   }
@@ -63,8 +60,8 @@ public final class JavaVersion extends SemanticVersion {
    * @param version the version to copy from.
    * @return the builder.
    */
-  @Nonnull
-  public static Builder builder(@Nonnull JavaVersion version) {
+  @NonNull
+  public static Builder builder(@NonNull JavaVersion version) {
     return builder()
         .major(version.major())
         .minor(version.minor())
@@ -82,8 +79,8 @@ public final class JavaVersion extends SemanticVersion {
    * @throws IllegalArgumentException when the passed version has an invalid format.
    * @throws NumberFormatException when one or more elements contain invalid numbers.
    */
-  @Nonnull
-  public static Builder builder(@Nonnull String version)
+  @NonNull
+  public static Builder builder(@NonNull String version)
       throws IllegalArgumentException {
     return builder().parse(version);
   }
@@ -93,7 +90,7 @@ public final class JavaVersion extends SemanticVersion {
    *
    * @return the version.
    */
-  @Nonnull
+  @NonNull
   public static JavaVersion current() {
     return currentBuilder().build();
   }
@@ -103,7 +100,7 @@ public final class JavaVersion extends SemanticVersion {
    *
    * @return the builder.
    */
-  @Nonnull
+  @NonNull
   public static Builder currentBuilder() {
     return builder(System.getProperty("java.version"));
   }
@@ -116,8 +113,8 @@ public final class JavaVersion extends SemanticVersion {
    * @throws IllegalArgumentException when the passed version has an invalid format.
    * @throws NumberFormatException when one or more elements contain invalid numbers.
    */
-  @Nonnull
-  public static JavaVersion of(@Nonnull String version)
+  @NonNull
+  public static JavaVersion of(@NonNull String version)
       throws IllegalArgumentException {
     return builder(version).build();
   }
@@ -126,7 +123,7 @@ public final class JavaVersion extends SemanticVersion {
    * {@inheritDoc}
    */
   @Override
-  public int compareTo(@Nonnull SemanticVersion version) {
+  public int compareTo(@NonNull SemanticVersion version) {
     if (version instanceof JavaVersion) {
       return this.compareTo(((JavaVersion) version));
     }
@@ -183,7 +180,7 @@ public final class JavaVersion extends SemanticVersion {
   /**
    * {@inheritDoc}
    */
-  @Nonnull
+  @NonNull
   @Override
   public JavaVersion extra(@Nullable String value) {
     return builder(this).extra(value).build();
@@ -192,16 +189,16 @@ public final class JavaVersion extends SemanticVersion {
   /**
    * {@inheritDoc}
    */
-  @Nonnull
+  @NonNull
   @Override
-  public JavaVersion major(@Nonnegative int value) {
+  public JavaVersion major(int value) {
     return builder(this).major(value).build();
   }
 
   /**
    * {@inheritDoc}
    */
-  @Nonnull
+  @NonNull
   @Override
   public JavaVersion metadata(@Nullable String value) {
     return builder(this).metadata(value).build();
@@ -210,25 +207,25 @@ public final class JavaVersion extends SemanticVersion {
   /**
    * {@inheritDoc}
    */
-  @Nonnull
+  @NonNull
   @Override
-  public JavaVersion minor(@Nonnegative int value) {
+  public JavaVersion minor(int value) {
     return builder(this).minor(value).build();
   }
 
   /**
    * {@inheritDoc}
    */
-  @Nonnull
+  @NonNull
   @Override
-  public JavaVersion patch(@Nonnegative int value) {
+  public JavaVersion patch(int value) {
     return builder(this).patch(value).build();
   }
 
   /**
    * {@inheritDoc}
    */
-  @Nonnull
+  @NonNull
   @Override
   public String toString() {
     if (this.updateNumber() != 0) {
@@ -269,7 +266,6 @@ public final class JavaVersion extends SemanticVersion {
    *
    * @return the number.
    */
-  @Nonnegative
   public int updateNumber() {
     return this.updateNumber;
   }
@@ -277,7 +273,6 @@ public final class JavaVersion extends SemanticVersion {
   /**
    * Provides a builder for Java versions.
    */
-  @NotThreadSafe
   public static class Builder extends SemanticVersion.Builder {
 
     private int updateNumber;
@@ -288,7 +283,7 @@ public final class JavaVersion extends SemanticVersion {
     /**
      * {@inheritDoc}
      */
-    @Nonnull
+    @NonNull
     @Override
     public JavaVersion build() {
       return (new JavaVersion(this.major(), this.minor(), this.patch(), this.extra(),
@@ -298,7 +293,7 @@ public final class JavaVersion extends SemanticVersion {
     /**
      * {@inheritDoc}
      */
-    @Nonnull
+    @NonNull
     @Override
     public Builder extra(@Nullable String extra) throws IllegalArgumentException {
       super.extra(extra);
@@ -308,9 +303,9 @@ public final class JavaVersion extends SemanticVersion {
     /**
      * {@inheritDoc}
      */
-    @Nonnull
+    @NonNull
     @Override
-    public Builder major(@Nonnegative int major) {
+    public Builder major(int major) {
       super.major(major);
       return this;
     }
@@ -318,7 +313,7 @@ public final class JavaVersion extends SemanticVersion {
     /**
      * {@inheritDoc}
      */
-    @Nonnull
+    @NonNull
     @Override
     public Builder metadata(@Nullable String metadata) throws IllegalArgumentException {
       super.metadata(metadata);
@@ -328,9 +323,9 @@ public final class JavaVersion extends SemanticVersion {
     /**
      * {@inheritDoc}
      */
-    @Nonnull
+    @NonNull
     @Override
-    public Builder minor(@Nonnegative int minor) {
+    public Builder minor(int minor) {
       super.minor(minor);
       return this;
     }
@@ -338,9 +333,9 @@ public final class JavaVersion extends SemanticVersion {
     /**
      * {@inheritDoc}
      */
-    @Nonnull
+    @NonNull
     @Override
-    protected Builder parse(@Nonnull String version) {
+    protected Builder parse(@NonNull String version) {
       int updateIndex = version.indexOf('_');
 
       if (updateIndex != -1) {
@@ -380,9 +375,9 @@ public final class JavaVersion extends SemanticVersion {
     /**
      * {@inheritDoc}
      */
-    @Nonnull
+    @NonNull
     @Override
-    public Builder patch(@Nonnegative int patch) {
+    public Builder patch(int patch) {
       super.patch(patch);
       return this;
     }
@@ -390,7 +385,7 @@ public final class JavaVersion extends SemanticVersion {
     /**
      * {@inheritDoc}
      */
-    @Nonnull
+    @NonNull
     @Override
     public Builder reset() {
       super.reset();
@@ -403,8 +398,8 @@ public final class JavaVersion extends SemanticVersion {
      * @param updateNumber the number.
      * @return the builder.
      */
-    @Nonnull
-    public Builder updateNumber(@Nonnegative int updateNumber) {
+    @NonNull
+    public Builder updateNumber(int updateNumber) {
       this.updateNumber = updateNumber;
       return this;
     }
@@ -414,7 +409,6 @@ public final class JavaVersion extends SemanticVersion {
      *
      * @return the number.
      */
-    @Nonnegative
     public int updateNumber() {
       return this.updateNumber;
     }

@@ -17,9 +17,8 @@
 package com.torchmind.utility.version.semantic;
 
 import com.torchmind.utility.version.VersionRange;
-import javax.annotation.Nonnegative;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import edu.umd.cs.findbugs.annotations.NonNull;
+import edu.umd.cs.findbugs.annotations.Nullable;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -43,8 +42,11 @@ public class SemanticVersionTest {
    * @param extra The expected extra bit (if any).
    * @param metadata The expected metadata bit (if any).
    */
-  private void assertVersion(@Nonnull SemanticVersion version, @Nonnegative int major,
-      @Nonnegative int minor, @Nonnegative int patch, @Nullable String extra,
+  private void assertVersion(@NonNull SemanticVersion version,
+      int major,
+      int minor,
+      int patch,
+      @Nullable String extra,
       @Nullable String metadata) {
     Assert.assertEquals(major, version.major());
     Assert.assertEquals(minor, version.minor());
@@ -64,8 +66,8 @@ public class SemanticVersionTest {
   }
 
   /**
-   * Tests {@link SemanticVersion#newerThan(SemanticVersion)}
-   * and {@link SemanticVersion#olderThan(SemanticVersion)}.
+   * Tests {@link SemanticVersion#newerThan(SemanticVersion)} and {@link
+   * SemanticVersion#olderThan(SemanticVersion)}.
    */
   @Test
   public void testCompare() {
