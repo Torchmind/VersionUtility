@@ -30,8 +30,13 @@ When running maven you may simply add a new dependency along with our repository
 
 ```xml
 <repository>
-  <id>torchmind</id>
-  <url>https://maven.torchmind.com/snapshot/</url>
+  <id>sonatype</id>
+  <name>Sonatype Open Source Repository</name>
+  <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+  
+  <snapshots>
+    <enabled>true</enabled>
+  </snapshots>
 </repository>
 
 <dependencies>
