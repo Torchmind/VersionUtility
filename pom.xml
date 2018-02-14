@@ -153,6 +153,9 @@
                 <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
                 <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
               </manifest>
+              <manifestEntries>
+                <Automatic-Module-Name>com.torchmind.utility.version</Automatic-Module-Name>
+              </manifestEntries>
             </archive>
           </configuration>
         </plugin>
