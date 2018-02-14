@@ -1,6 +1,6 @@
 [![License](https://img.shields.io/github/license/Torchmind/VersionUtility.svg?style=flat-square)](https://www.apache.org/licenses/LICENSE-2.0.txt)
-[![Latest Tag](https://img.shields.io/github/tag/Torchmind/VersionUtility.svg?style=flat-square&label=Latest Tag)](https://github.com/Torchmind/VersionUtility/tags)
-[![Latest Release](https://img.shields.io/github/release/Torchmind/VersionUtility.svg?style=flat-square&label=Latest Release)](https://github.com/Torchmind/VersionUtility/releases)
+[![Latest tag](https://img.shields.io/github/tag/Torchmind/VersionUtility.svg?style=flat-square)](https://github.com/Torchmind/VersionUtility/tags)
+[![GitHub tag](https://img.shields.io/github/release/Torchmind/VersionUtility.svg?style=flat-square)](https://github.com/Torchmind/VersionUtility/releases)
 
 Version Utility
 ===============
@@ -21,7 +21,6 @@ Provides POJO representations for version numbers and ranges.
 Contacts
 --------
 
-* [IRC #Akkarin on irc.spi.gt](http://irc.spi.gt/iris/?nick=Guest....&channels=Akkarin&prompt=1) (alternatively #Akkarin on esper.net)
 * [GitHub](https://github.com/Torchmind/VersionUtility)
 
 Using
