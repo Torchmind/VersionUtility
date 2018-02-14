@@ -63,6 +63,11 @@
     <url>https://github.com/Torchmind/VersionUtility/issues</url>
   </issueManagement>
 
+  <ciManagement>
+    <system>CircleCI</system>
+    <url>https://circleci.com/gh/Torchmind/VersionUtility</url>
+  </ciManagement>
+
   <scm>
     <url>https://github.com/Torchmind/VersionUtility</url>
     <connection>https://github.com/Torchmind/VersionUtility.git</connection>

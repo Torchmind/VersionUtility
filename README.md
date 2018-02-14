@@ -1,6 +1,7 @@
 [![License](https://img.shields.io/github/license/Torchmind/VersionUtility.svg?style=flat-square)](https://www.apache.org/licenses/LICENSE-2.0.txt)
 [![Latest tag](https://img.shields.io/github/tag/Torchmind/VersionUtility.svg?style=flat-square)](https://github.com/Torchmind/VersionUtility/tags)
 [![GitHub tag](https://img.shields.io/github/release/Torchmind/VersionUtility.svg?style=flat-square)](https://github.com/Torchmind/VersionUtility/releases)
+[![CircleCI](https://img.shields.io/circleci/project/github/Torchmind/VersionUtility.svg?style=flat-square)](https://circleci.com/gh/Torchmind/VersionUtility)
 
 Version Utility
 ===============
