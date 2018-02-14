@@ -163,17 +163,6 @@ public final class JavaVersion extends SemanticVersion {
   }
 
   /**
-   * {@inheritDoc}
-   */
-  @Nonnull
-  @Override
-  public JavaVersion equals(@Nullable SemanticVersion version,
-      @Nonnull Consumer<SemanticVersion> consumer) {
-    super.equals(version, consumer);
-    return this;
-  }
-
-  /**
    * Checks whether this version and {@code version} are equal.
    *
    * @param version the version to compare to.
@@ -232,40 +221,8 @@ public final class JavaVersion extends SemanticVersion {
    */
   @Nonnull
   @Override
-  public JavaVersion newerThan(@Nullable SemanticVersion version,
-      @Nonnull Consumer<SemanticVersion> consumer) {
-    super.newerThan(version, consumer);
-    return this;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Nonnull
-  @Override
-  public JavaVersion olderThan(@Nullable SemanticVersion version,
-      @Nonnull Consumer<SemanticVersion> consumer) {
-    super.olderThan(version, consumer);
-    return this;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Nonnull
-  @Override
   public JavaVersion patch(@Nonnegative int value) {
     return builder(this).patch(value).build();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Nonnull
-  @Override
-  public JavaVersion stable(@Nonnull Consumer<SemanticVersion> consumer) {
-    super.stable(consumer);
-    return this;
   }
 
   /**
@@ -279,16 +236,6 @@ public final class JavaVersion extends SemanticVersion {
     }
 
     return super.toString();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Nonnull
-  @Override
-  public JavaVersion unstable(@Nonnull Consumer<SemanticVersion> consumer) {
-    super.unstable(consumer);
-    return this;
   }
 
   /**

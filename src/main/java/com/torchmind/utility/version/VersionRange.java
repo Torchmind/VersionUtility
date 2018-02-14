@@ -16,6 +16,7 @@
  */
 package com.torchmind.utility.version;
 
+import java.util.Collection;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -117,52 +118,6 @@ public final class VersionRange<T extends Version<T>> {
   }
 
   /**
-   * {@inheritDoc}
-   */
-  @Override
-  @SuppressWarnings("unchecked")
-  public boolean equals(Object object) {
-    if (this == object) {
-      return true;
-    }
-    if (object == null || this.getClass() != object.getClass()) {
-      return false;
-    }
-
-    if (!this.startBound.getClass().equals(((VersionRange<?>) object).startBound.getClass())) {
-      return false;
-    }
-    VersionRange<T> that = (VersionRange<T>) object;
-
-    if (this.startInclusive != that.startInclusive) {
-      return false;
-    }
-
-    if (this.endInclusive != that.endInclusive) {
-      return false;
-    }
-
-    if (!this.startBound.equals(that.startBound)) {
-      return false;
-    }
-
-    return this.endBound.equals(that.endBound);
-
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public int hashCode() {
-    int result = this.startBound.hashCode();
-    result = 31 * result + this.endBound.hashCode();
-    result = 31 * result + (this.startInclusive ? 1 : 0);
-    result = 31 * result + (this.endInclusive ? 1 : 0);
-    return result;
-  }
-
-  /**
    * Checks whether {@code version} is part of this range.
    *
    * @param version the version.
@@ -180,28 +135,13 @@ public final class VersionRange<T extends Version<T>> {
   }
 
   /**
-   * Checks whether {@code version} is part of this range and executes {@code consumer} if so.
-   *
-   * @param version the version.
-   * @param consumer the consumer.
-   * @return the instance.
-   */
-  @Nonnull
-  public VersionRange<T> matches(@Nullable T version, @Nonnull Consumer<T> consumer) {
-    if (this.matches(version)) {
-      consumer.accept(version);
-    }
-    return this;
-  }
-
-  /**
    * Retrieves a set containing all elements that match this range.
    *
    * @param versions the original set.
    * @return the matching set.
    */
   @Nonnull
-  public Set<T> matching(@Nonnull Set<T> versions) {
+  public Set<T> matching(@Nonnull Collection<T> versions) {
     return versions.stream()
         .filter(this::matches)
         .collect(Collectors.toSet());
@@ -247,6 +187,47 @@ public final class VersionRange<T extends Version<T>> {
   @Nonnull
   public VersionRange<T> startInclusive(boolean value) {
     return builder(this).startInclusive(value).build();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  @SuppressWarnings("unchecked")
+  public boolean equals(Object object) {
+    if (this == object) {
+      return true;
+    }
+    if (object == null || this.getClass() != object.getClass()) {
+      return false;
+    }
+
+    if (!this.startBound.getClass().equals(((VersionRange<?>) object).startBound.getClass())) {
+      return false;
+    }
+    VersionRange<T> that = (VersionRange<T>) object;
+
+    if (this.startInclusive != that.startInclusive) {
+      return false;
+    }
+
+    if (this.endInclusive != that.endInclusive) {
+      return false;
+    }
+
+    return this.startBound.equals(that.startBound) && this.endBound.equals(that.endBound);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public int hashCode() {
+    int result = this.startBound.hashCode();
+    result = 31 * result + this.endBound.hashCode();
+    result = 31 * result + (this.startInclusive ? 1 : 0);
+    result = 31 * result + (this.endInclusive ? 1 : 0);
+    return result;
   }
 
   /**

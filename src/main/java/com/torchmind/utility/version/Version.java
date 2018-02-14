@@ -17,7 +17,6 @@
 package com.torchmind.utility.version;
 
 import java.util.Optional;
-import java.util.function.Consumer;
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -31,16 +30,6 @@ import javax.annotation.concurrent.ThreadSafe;
  */
 @ThreadSafe
 public interface Version<T extends Version> extends Comparable<T> {
-
-  /**
-   * Executes {@code consumer} if this version is equal to {@code version}.
-   *
-   * @param version the version to compare to.
-   * @param consumer the consumer.
-   * @return the instance.
-   */
-  @Nonnull
-  T equals(@Nullable T version, @Nonnull Consumer<T> consumer);
 
   /**
    * Retrieves the major version bit.
@@ -85,32 +74,12 @@ public interface Version<T extends Version> extends Comparable<T> {
   boolean newerThan(@Nullable T version);
 
   /**
-   * Executes {@code consumer} if this version is newer than {@code version}.
-   *
-   * @param version the version to compare to.
-   * @param consumer the consumer.
-   * @return the instance.
-   */
-  @Nonnull
-  T newerThan(@Nullable T version, @Nonnull Consumer<T> consumer);
-
-  /**
    * Checks whether this version is older than {@code version}.
    *
    * @param version the version.
    * @return {@code true} if older than {@code version}, {@code false} otherwise.
    */
   boolean olderThan(@Nullable T version);
-
-  /**
-   * Executes {@code consumer} if this version is older than {@code version}.
-   *
-   * @param version the version to compare to.
-   * @param consumer the consumer.
-   * @return the instance.
-   */
-  @Nonnull
-  T olderThan(@Nullable T version, @Nonnull Consumer<T> consumer);
 
   /**
    * Retrieves the patch version bit.
@@ -137,37 +106,11 @@ public interface Version<T extends Version> extends Comparable<T> {
   boolean stable();
 
   /**
-   * Executes {@code consumer} if this version is stable.
-   *
-   * @param consumer the consumer.
-   * @return the instance.
-   */
-  @Nonnull
-  T stable(@Nonnull Consumer<T> consumer);
-
-  /**
-   * Retrieves a string representation of the version.
-   *
-   * @return the string.
-   */
-  @Nonnull
-  String toString();
-
-  /**
    * Checks whether this version is unstable.
    *
    * @return {@code true} if unstable, {@code false} otherwise.
    */
   boolean unstable();
-
-  /**
-   * Executes {@code consumer} if this version is unstable.
-   *
-   * @param consumer the consumer.
-   * @return the instance.
-   */
-  @Nonnull
-  T unstable(@Nonnull Consumer<T> consumer);
 
   /**
    * Retrieves the instability type (if any).
@@ -176,4 +119,12 @@ public interface Version<T extends Version> extends Comparable<T> {
    */
   @Nonnull
   Optional<UnstableVersionType> unstableVersionType();
+
+  /**
+   * Retrieves a string representation of the version.
+   *
+   * @return the string.
+   */
+  @Nonnull
+  String toString();
 }

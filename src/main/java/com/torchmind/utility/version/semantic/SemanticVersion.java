@@ -16,8 +16,8 @@
  */
 package com.torchmind.utility.version.semantic;
 
-import com.torchmind.utility.version.Version;
 import com.torchmind.utility.version.UnstableVersionType;
+import com.torchmind.utility.version.Version;
 import com.torchmind.utility.version.VersionRange;
 import java.util.Optional;
 import java.util.function.BiFunction;
@@ -332,20 +332,6 @@ public class SemanticVersion implements Version<SemanticVersion> {
   }
 
   /**
-   * {@inheritDoc}
-   */
-  @Nonnull
-  @Override
-  public SemanticVersion equals(@Nullable SemanticVersion version,
-      @Nonnull Consumer<SemanticVersion> consumer) {
-    if (this.equals(version)) {
-      consumer.accept(this);
-    }
-
-    return this;
-  }
-
-  /**
    * Retrieves the extra version bit (if any).
    *
    * @return the bit.
@@ -482,37 +468,9 @@ public class SemanticVersion implements Version<SemanticVersion> {
   /**
    * {@inheritDoc}
    */
-  @Nonnull
-  @Override
-  public SemanticVersion newerThan(@Nullable SemanticVersion version,
-      @Nonnull Consumer<SemanticVersion> consumer) {
-    if (this.newerThan(version)) {
-      consumer.accept(this);
-    }
-
-    return this;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean olderThan(@Nullable SemanticVersion version) {
     return this.compareTo(version) == -1;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Nonnull
-  @Override
-  public SemanticVersion olderThan(@Nullable SemanticVersion version,
-      @Nonnull Consumer<SemanticVersion> consumer) {
-    if (this.olderThan(version)) {
-      consumer.accept(this);
-    }
-
-    return this;
   }
 
   /**
@@ -541,18 +499,6 @@ public class SemanticVersion implements Version<SemanticVersion> {
   @Override
   public boolean stable() {
     return (this.unstableVersionType == null && this.major() > 0);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Nonnull
-  @Override
-  public SemanticVersion stable(@Nonnull Consumer<SemanticVersion> consumer) {
-    if (this.stable()) {
-      consumer.accept(this);
-    }
-    return this;
   }
 
   /**
@@ -595,18 +541,6 @@ public class SemanticVersion implements Version<SemanticVersion> {
   @Override
   public boolean unstable() {
     return !this.stable();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Nonnull
-  @Override
-  public SemanticVersion unstable(@Nonnull Consumer<SemanticVersion> consumer) {
-    if (this.unstable()) {
-      consumer.accept(this);
-    }
-    return this;
   }
 
   /**
