@@ -50,8 +50,8 @@ When running maven you may simply add a new dependency along with our repository
 
 Parsing [SemVer](http://semver.org) based versions:
 ```java
-SemanticVersion version = SemanticVersion.of ("1.0-alpha");
-SemanticVersion version = SemanticVersion.of ("0.1.0");
+SemanticVersion version = SemanticVersion.of("1.0-alpha");
+SemanticVersion version = SemanticVersion.of("0.1.0");
 ```
 
 Comparing versions:
@@ -59,20 +59,20 @@ Comparing versions:
 IVersion version1 = ...;
 IVersion version2 = ...;
 
-if (version2.isNewerThan (version1)) {
+if (version2.isNewerThan(version1)) {
   // Update application or something
 }
 ```
 
 Creating version ranges
 ```java
-VersionRange<SemanticVersion> range = SemanticVersion.range ("(1.0,2.0]");
+VersionRange<SemanticVersion> range = SemanticVersion.range("(1.0,2.0]");
 
 // OR
 
 SemanticVersion version1 = ...;
 SemanticVersion version2 = ...;
-VersionRange<SemanticVersion> range = SemanticVersion.range (version1, version2);
+VersionRange<SemanticVersion> range = SemanticVersion.range(version1, version2);
 ```
 
 Checking range matches:
@@ -80,7 +80,7 @@ Checking range matches:
 VersionRange range = ...;
 IVersion version = ...;
 
-if (range.matches (version)) {
+if (range.matches(version)) {
   // Dependency satisfied or something
 }
 
@@ -89,7 +89,7 @@ if (range.matches (version)) {
 VersionRange range = ...;
 Set<IVersion> versions = ...;
 
-Set<IVersion> matchingVersions = range.matching (versions);
+Set<IVersion> matchingVersions = range.matching(versions);
 ```
 
 Note: Developers may develop their own version parsers by implementing the ```com.torchmind.utility.version.IVersion```
