@@ -16,7 +16,8 @@
  */
 
 /**
- * Provides version implementations based on the <a href="http://semver.org/">Semantic Versioning standard</a>.
+ * Provides version implementations based on the <a href="http://semver.org/">Semantic Versioning
+ * standard</a>.
  *
  * @author Johannes Donath
  */

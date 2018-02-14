@@ -16,12 +16,12 @@
  */
 package com.torchmind.utility.version;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * Provides a list of valid unstable version types.
@@ -29,46 +29,47 @@ import java.util.Optional;
  * @author Johannes Donath
  */
 public enum UnstableVersionType implements Comparable<UnstableVersionType> {
-        UNKNOWN,
-        SNAPSHOT ("snapshot"),
-        ALPHA ("a", "alpha"),
-        BETA ("b", "beta"),
-        RELEASE_CANDIDATE ("rc");
+  UNKNOWN,
+  SNAPSHOT("snapshot"),
+  ALPHA("a", "alpha"),
+  BETA("b", "beta"),
+  RELEASE_CANDIDATE("rc");
 
-        private static final Map<String, UnstableVersionType> aliasMap;
-        private final String[] aliases;
+  private static final Map<String, UnstableVersionType> aliasMap;
 
-        static {
-                Map<String, UnstableVersionType> map = new HashMap<> ();
+  static {
+    Map<String, UnstableVersionType> map = new HashMap<>();
 
-                for (UnstableVersionType versionType : values ()) {
-                        if (versionType.aliases == null) {
-                                continue;
-                        }
+    for (UnstableVersionType versionType : values()) {
+      if (versionType.aliases == null) {
+        continue;
+      }
 
-                        for (String alias : versionType.aliases) {
-                                map.putIfAbsent (alias, versionType);
-                        }
-                }
+      for (String alias : versionType.aliases) {
+        map.putIfAbsent(alias, versionType);
+      }
+    }
 
-                aliasMap = Collections.unmodifiableMap (map);
-        }
+    aliasMap = Collections.unmodifiableMap(map);
+  }
 
-        UnstableVersionType (@Nullable String... aliases) {
-                this.aliases = aliases;
-        }
+  private final String[] aliases;
 
-        /**
-         * Retrieves the version type of a certain identifier.
-         *
-         * @param alias The alias.
-         * @return The version type.
-         */
-        @Nonnull
-        public static Optional<UnstableVersionType> byAlias (@Nullable String alias) {
-                if (alias == null) {
-                        return Optional.empty ();
-                }
-                return Optional.of (aliasMap.getOrDefault (alias, UNKNOWN));
-        }
+  UnstableVersionType(@Nullable String... aliases) {
+    this.aliases = aliases;
+  }
+
+  /**
+   * Retrieves the version type of a certain identifier.
+   *
+   * @param alias The alias.
+   * @return The version type.
+   */
+  @Nonnull
+  public static Optional<UnstableVersionType> byAlias(@Nullable String alias) {
+    if (alias == null) {
+      return Optional.empty();
+    }
+    return Optional.of(aliasMap.getOrDefault(alias, UNKNOWN));
+  }
 }
