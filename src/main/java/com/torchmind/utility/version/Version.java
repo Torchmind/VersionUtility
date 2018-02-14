@@ -30,7 +30,7 @@ import javax.annotation.concurrent.ThreadSafe;
  * @author Johannes Donath
  */
 @ThreadSafe
-public interface IVersion<T extends IVersion> extends Comparable<T> {
+public interface Version<T extends Version> extends Comparable<T> {
 
   /**
    * Executes {@code consumer} if this version is equal to {@code version}.

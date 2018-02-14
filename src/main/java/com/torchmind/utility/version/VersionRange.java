@@ -31,7 +31,7 @@ import javax.annotation.concurrent.ThreadSafe;
  * @author Johannes Donath
  */
 @ThreadSafe
-public final class VersionRange<T extends IVersion<T>> {
+public final class VersionRange<T extends Version<T>> {
 
   private final T endBound;
   private final boolean endInclusive;
@@ -54,7 +54,7 @@ public final class VersionRange<T extends IVersion<T>> {
    * @return the builder.
    */
   @Nonnull
-  public static <T extends IVersion<T>> Builder<T> builder() {
+  public static <T extends Version<T>> Builder<T> builder() {
     return (new Builder<>());
   }
 
@@ -66,7 +66,7 @@ public final class VersionRange<T extends IVersion<T>> {
    * @return the builder.
    */
   @Nonnull
-  public static <T extends IVersion<T>> Builder<T> builder(@Nonnull VersionRange<T> range) {
+  public static <T extends Version<T>> Builder<T> builder(@Nonnull VersionRange<T> range) {
     return VersionRange.<T>builder()
         .startBound(range.startBound())
         .startInclusive(range.startInclusive())
@@ -255,7 +255,7 @@ public final class VersionRange<T extends IVersion<T>> {
    * @param <T> the version type.
    */
   @NotThreadSafe
-  public static final class Builder<T extends IVersion<T>> {
+  public static final class Builder<T extends Version<T>> {
 
     private T endBound;
     private boolean endInclusive;

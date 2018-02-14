@@ -111,7 +111,7 @@ public class VersionRangeTest {
         }
 
         /**
-         * Tests {@link com.torchmind.utility.version.VersionRange#matches(IVersion)}.
+         * Tests {@link com.torchmind.utility.version.VersionRange#matches( Version )}.
          */
         @Test
         public void testContains () {
@@ -221,5 +221,5 @@ public class VersionRangeTest {
         /**
          * Provides an interface for testing purposes.
          */
-        public interface TestVersion extends IVersion<TestVersion> { }
+        public interface TestVersion extends Version<TestVersion> { }
 }

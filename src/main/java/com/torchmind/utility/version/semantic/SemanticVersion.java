@@ -16,7 +16,7 @@
  */
 package com.torchmind.utility.version.semantic;
 
-import com.torchmind.utility.version.IVersion;
+import com.torchmind.utility.version.Version;
 import com.torchmind.utility.version.UnstableVersionType;
 import com.torchmind.utility.version.VersionRange;
 import java.util.Optional;
@@ -34,7 +34,7 @@ import javax.annotation.concurrent.ThreadSafe;
  * @author Johannes Donath
  */
 @ThreadSafe
-public class SemanticVersion implements IVersion<SemanticVersion> {
+public class SemanticVersion implements Version<SemanticVersion> {
 
   private final String extra;
   private final int major;
