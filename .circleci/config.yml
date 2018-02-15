@@ -22,8 +22,7 @@ jobs:
       - run: mvn clean package
       - store_test_results:
           path: target/surefire-reports
-      - run:
-        command: |
+      - run: |
           mkdir /tmp/artifacts/
           cp target/com.torchmind.utility.version-*.{jar,pom,asc} /tmp/artifacts/
           cp -r target/apidocs/ /tmp/artifacts/
