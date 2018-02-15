@@ -1,6 +1,6 @@
 [![License](https://img.shields.io/github/license/Torchmind/VersionUtility.svg?style=flat-square)](https://www.apache.org/licenses/LICENSE-2.0.txt)
-[![Latest tag](https://img.shields.io/github/tag/Torchmind/VersionUtility.svg?style=flat-square)](https://github.com/Torchmind/VersionUtility/tags)
-[![GitHub tag](https://img.shields.io/github/release/Torchmind/VersionUtility.svg?style=flat-square)](https://github.com/Torchmind/VersionUtility/releases)
+[![Maven Central](https://img.shields.io/maven-central/v/com.torchmind.utility/version.svg?style=flat-square)](https://search.maven.org/#search%7Cga%7C1%7Cg%3Acom.torchmind.utility%20a%3Aversion)
+[![GitHub Release](https://img.shields.io/github/release/Torchmind/VersionUtility.svg?style=flat-square)](https://github.com/Torchmind/VersionUtility/releases)
 [![CircleCI](https://img.shields.io/circleci/project/github/Torchmind/VersionUtility.svg?style=flat-square)](https://circleci.com/gh/Torchmind/VersionUtility)
 
 Version Utility
@@ -22,6 +22,7 @@ Provides POJO representations for version numbers and ranges.
 Contacts
 --------
 
+* [#.start](http://webchat.esper.net/?channels=.start&prompt=1) on EsperNet
 * [GitHub](https://github.com/Torchmind/VersionUtility)
 
 Using
