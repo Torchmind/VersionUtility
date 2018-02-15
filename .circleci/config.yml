@@ -24,7 +24,7 @@ jobs:
           path: target/surefire-reports
       - run: |
           mkdir /tmp/artifacts/
-          cp target/com.torchmind.utility.version-*.{jar,pom,asc} /tmp/artifacts/
+          cp target/com.torchmind.utility.version-*.jar /tmp/artifacts/
           cp -r target/apidocs/ /tmp/artifacts/
           cp -r target/surefire-reports/ /tmp/artifacts/
       - store_artifacts:
