@@ -31,6 +31,15 @@ Using
 When running maven you may simply add a new dependency along with our repository to your ```pom.xml```:
 
 ```xml
+<dependencies>
+  <dependency>
+    <groupId>com.torchmind.utility</groupId>
+    <artifactId>version</artifactId>
+    <version>2.0</version>
+  </dependency>
+</dependencies>
+
+<!-- Or for unstable releases: -->
 <repository>
   <id>sonatype</id>
   <name>Sonatype Open Source Repository</name>
@@ -45,7 +54,7 @@ When running maven you may simply add a new dependency along with our repository
   <dependency>
     <groupId>com.torchmind.utility</groupId>
     <artifactId>version</artifactId>
-    <version>2.0-SNAPSHOT</version>
+    <version>2.1-SNAPSHOT</version>
   </dependency>
 </dependencies>
 ```
