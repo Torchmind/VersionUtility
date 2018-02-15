@@ -23,4 +23,4 @@ jobs:
       - store_test_results:
           path: target/surefire-reports
       - store_artifacts:
-          path: target/com.torchmind.utility.version-*.jar
+          path: target/
