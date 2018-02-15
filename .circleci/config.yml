@@ -19,4 +19,8 @@ jobs:
           paths:
             - ~/.m2
           key: v1-dependencies-{{ checksum "pom.xml" }}
-      - run: mvn test
+      - run: mvn clean package
+      - store_test_results:
+          path: target/surefire-reports
+      - store_artifacts:
+          path: target/com.torchmind.utility.version-*.jar
