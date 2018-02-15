@@ -32,6 +32,7 @@
   <!-- Artifact Metadata -->
   <name>Version Utility</name>
   <description>Provides POJO representations of versions.</description>
+  <url>https://github.com/Torchmind/VersionUtility</url>
   <inceptionYear>2014</inceptionYear>
 
   <organization>
